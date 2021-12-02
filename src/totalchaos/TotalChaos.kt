@@ -24,7 +24,7 @@ class TotalChaos : Mod() {
 			};
 			
 			
-			val map = Core.bundle.getProperties();
+			val map = Core.bundle.properties;
 			val mapCopy = map.copy();
 			val keysTemp = Seq<String>();
 			map.each { k, v -> keys.add(k) };
