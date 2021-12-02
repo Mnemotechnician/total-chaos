@@ -76,14 +76,12 @@ class TotalChaos : Mod() {
 			};
 		};*/
 		
-		Events.run(Trigger.uiDrawEnd::class.java) {
+		Events.run(Trigger.postDraw::class.java) {
 			buffer.end();
 			
-			Log.info("shader start")
 			Draw.blend(Blending.additive);
 			Draw.blit(buffer, shader);
 			Draw.blend();
-			Log.info("shader end")
 		};
 	};
 	
@@ -98,7 +96,6 @@ class TotalChaos : Mod() {
 		}
 		
 		override open fun apply() {
-			Log.info("applied")
 			setUniformf("u_time", Time.globalTime / Mathf.PI);
 			
 			noise.bind(1);
