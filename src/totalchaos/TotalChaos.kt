@@ -79,9 +79,11 @@ class TotalChaos : Mod() {
 		Events.run(Trigger.postDraw::class.java) {
 			buffer.end();
 			
-			Draw.blend(Blending.additive);
-			Draw.blit(buffer, shader);
-			Draw.blend();
+			Draw.draw(draw.z()) {
+				Draw.blend(Blending.additive);
+				Draw.blit(buffer, shader);
+				Draw.blend();
+			}
 		};
 	};
 	
