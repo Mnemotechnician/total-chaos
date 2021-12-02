@@ -6,13 +6,13 @@ uniform sampler2D u_noise;
 uniform float u_time;
 
 void main() {
-	vec seed = gl_fragCoord + u_time;
+	float seed = gl_FragCoord.x + gl_FragCoord.y + u_time;
 	vec2 noise = vec2(
-		texture2D(u_noise, seed * vec2(-0.43, 0.39)),
-		texture2D(u_noise, seed * vec2(0.61, -0.76))
+		texture2D(u_noise, seed * vec2(-0.43, 0.39)).r,
+		texture2D(u_noise, seed * vec2(0.61, -0.76)).r
 	);
 	
-	vec3 color = texture2D(u_texture, gl_FragCoord.xy + noise);
+	vec3 color = texture2D(u_texture, gl_FragCoord.xy + noise).rgb;
 	
-	gl_FragColor = color;
+	gl_FragColor = vec4(color, 1.0);
 }

@@ -71,11 +71,11 @@ class TotalChaos : Mod() {
 			beginDraw();
 		}
 
-		Events.run(Trigger.uiDrawBegin::class.java) {
+		/*Events.run(Trigger.uiDrawBegin::class.java) {
 			if (Vars.state.isMenu()) {
 				beginDraw();
 			};
-		};
+		};*/
 		
 		Events.run(Trigger.uiDrawEnd::class.java) {
 			buffer.end();
