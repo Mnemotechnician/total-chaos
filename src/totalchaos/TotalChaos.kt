@@ -33,9 +33,8 @@ class TotalChaos : Mod() {
 			map.each { k, v -> keys.add(k) };
 			
 			map.each { k, v ->
-			    val index = Math.floor(Mathf.random(keys.size));
-			    val newKey = keys[index];
-			    keys.remove(index);
+			    val index = Mathf.random(keys.size);
+			    val newKey = keys.remove(index);
 			
 			    map.put(k, mapCopy[newKey]);
 			};
