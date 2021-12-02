@@ -8,14 +8,15 @@ import arc.struct.*;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.graphics.gl.*;
-import mindustry.game.EventType.*;
+
+import mindustry.*;
 import mindustry.mod.*;
+import mindustry.game.EventType.*;
 
 class TotalChaos : Mod() {
 
 	lateinit var buffer: FrameBuffer;
 	lateinit var shader: Shader;
-	lateinit var noise: Texture;
 	
 	init {
 		Events.on(ClientLoadEvent::class.java) {
@@ -56,13 +57,9 @@ class TotalChaos : Mod() {
 		}
 	}
 	
-	inline fun setupShader() {
+	open fun setupShader() {
 		buffer = FrameBuffer(Core.graphics.width, Core.graphics.height);
 		shader = NauseaShader(Vars.tree.get("shaders/screenspace.vert").readString(), Vars.tree.get("shaders/nausea.frag"));
-		
-		noise = Texture(Vars.tree.get("sprites/noise.png"));
-		noise.setFilter(Texture.TextureFilter.linear);
-                noise.setWrap(Texture.TextureWrap.repeat);
 		
 		inline fun beginDraw() {
 			buffer.resize(Core.graphics.width, Core.graphics.height);
@@ -89,6 +86,14 @@ class TotalChaos : Mod() {
 	};
 	
 	open class NauseaShader(vert: String, frag: String) : Shader(vert, frag) {
+	
+		lateinit var noise: Texture;
+		
+		init {
+			noise = Texture(Vars.tree.get("sprites/noise.png"));
+			noise.setFilter(Texture.TextureFilter.linear);
+        		noise.setWrap(Texture.TextureWrap.repeat);
+		}
 		
 		override open fun apply() {
 			setUniformf("u_time", Time.globalTime / Mathf.PI);
