@@ -16,14 +16,16 @@ class TotalChaos : Mod() {
 			//regions
 			val copy = Seq<TextureRegion>(500);
 			Core.atlas.regions.each {
-			    copy.add(TextureRegion(it));
+				copy.add(TextureRegion(it));
 			};
 			
 			Core.atlas.regions.each {
-			    val index = Mathf.random(copy.size);
-			    it.set(copy[index] as TextureAtlas.AtlasRegion);
-			
-			    copy.remove(index);
+				val index = Mathf.random(copy.size);
+				val newRegion = copy.remove(index);
+				
+				if (newRegion is TextureAtlas.AtlasRegion) {
+					it.set(newRegion);
+				}
 			};
 			
 			//bundles
@@ -33,10 +35,10 @@ class TotalChaos : Mod() {
 			map.each { k, v -> keys.add(k) };
 			
 			map.each { k, v ->
-			    val index = Mathf.random(keys.size);
-			    val newKey = keys.remove(index);
-			
-			    map.put(k, mapCopy[newKey]);
+				val index = Mathf.random(keys.size);
+				val newKey = keys.remove(index);
+				
+				map.put(k, mapCopy[newKey]);
 			};
 			
 			mapCopy.clear();
