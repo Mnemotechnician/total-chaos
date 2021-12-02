@@ -59,9 +59,9 @@ class TotalChaos : Mod() {
 	
 	open fun setupShader() {
 		buffer = FrameBuffer(Core.graphics.width, Core.graphics.height);
-		shader = NauseaShader(Vars.tree.get("shaders/screenspace.vert").readString(), Vars.tree.get("shaders/nausea.frag"));
+		shader = NauseaShader(Vars.tree.get("shaders/screenspace.vert").readString(), Vars.tree.get("shaders/nausea.frag").readString());
 		
-		inline fun beginDraw() {
+		fun beginDraw() {
 			buffer.resize(Core.graphics.width, Core.graphics.height);
 			buffer.begin(Color.clear);
 		}
