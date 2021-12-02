@@ -67,17 +67,19 @@ class TotalChaos : Mod() {
 		}
 		
 		//stealing code from bleach. idrk whether i should do that this way
-		/*Events.run(Trigger.preDraw::class.java) {
+		Events.run(Trigger.preDraw::class.java) {
+			Log.info("pre draw");
 			beginDraw();
-		}*/
+		}
 
-		Events.run(Trigger.uiDrawBegin::class.java) {
-			//if (Vars.state.isMenu()) {
+		/*Events.run(Trigger.uiDrawBegin::class.java) {
+			if (Vars.state.isMenu()) {
 				beginDraw();
-			//};
-		};
+			};
+		};*/
 		
 		Events.run(Trigger.uiDrawEnd::class.java) {
+			Log.info("post draw")
 			buffer.end();
 		
 			Draw.blend(Blending.additive);

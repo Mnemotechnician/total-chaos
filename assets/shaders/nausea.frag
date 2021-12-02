@@ -12,7 +12,5 @@ void main() {
 		texture2D(u_noise, seed * vec2(0.61, -0.76)).r
 	);
 	
-	vec3 color = texture2D(u_texture, gl_FragCoord.xy + noise).rgb;
-	
-	gl_FragColor = vec4(color, 1.0);
+	gl_FragColor = texture2D(u_texture, gl_FragCoord.xy + noise);
 }
