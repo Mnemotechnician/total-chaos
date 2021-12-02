@@ -5,12 +5,18 @@ import arc.*;
 import arc.math.*;
 import arc.util.*;
 import arc.struct.*;
+import arc.graphics.*;
 import arc.graphics.g2d.*;
+import arc.graphics.gl.*;
 import mindustry.game.EventType.*;
 import mindustry.mod.*;
 
 class TotalChaos : Mod() {
 
+	lateinit var buffer: FrameBuffer;
+	lateinit var shader: Shader;
+	lateinit var noise: Texture;
+	
 	init {
 		Events.on(ClientLoadEvent::class.java) {
 			//regions
@@ -40,11 +46,57 @@ class TotalChaos : Mod() {
 				
 				map.put(k, mapCopy[newKey]);
 			};
-			
 			mapCopy.clear();
 			
 			//updates
 			Updater.checkUpdates(this);
+			
+			//mogus
+			setupShader();
 		}
 	}
+	
+	inline fun setupShader() {
+		buffer = FrameBuffer(Core.graphics.width, Core.graphics.height);
+		shader = NauseaShader(Vars.tree.get("shaders/screenspace.vert").readString(), Vars.tree.get("shaders/nausea.frag"));
+		
+		noise = Texture(Vars.tree.get("sprites/noise.png"));
+		noise.setFilter(Texture.TextureFilter.linear);
+                noise.setWrap(Texture.TextureWrap.repeat);
+		
+		inline fun beginDraw() {
+			buffer.resize(Core.graphics.width, Core.graphics.height);
+			buffer.begin(Color.clear);
+		}
+		
+		//stealing code from bleach. idrk whether i should do that this way
+		Events.run(Trigger.preDraw::class.java) {
+			beginDraw();
+		}
+
+		Events.run(Trigger.uiDrawBegin::class.java) {
+			if (Vars.state.isMenu()) {
+				beginDraw();
+			};
+		};
+		
+		Events.run(Trigger.uiDrawEnd::class.java) {
+			buffer.end();
+		
+			Draw.blend(Blending.additive);
+			Draw.blit(buffer, shader);
+		};
+	};
+	
+	open class NauseaShader(vert: String, frag: String) : Shader(vert, frag) {
+		
+		override open fun apply() {
+			setUniformf("u_time", Time.globalTime / Mathf.PI);
+			
+			noise.bind(1);
+			setUniformi("u_noise", 1);
+		}
+		
+	}
+	
 }
