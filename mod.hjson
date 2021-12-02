@@ -1,20 +1,12 @@
-#the mod name as displayed in-game
-displayName: "Kotlin Mod Template"
+#!REPO "MHeMoTexHuK/total-chaos"
+#!VERSION 1.0
+#!BRANCH "master"
 
-#the internal name of your mod
-name: "example-kotlin-mod"
-
-#your name
-author: "You"
-
-#the fully qualified main class of the mod
-main: "example.ExampleKotlinMod"
-
-#the mod description as seen in the mod dialog
-description: "A Mindustry Kotlin mod template."
-
-#the mod version
+displayName: "Total Chaos"
+name: "totalchaos"
+author: "Мнемотехник"
+description: "Shuffles both the texture atlas and the current bundle, providing an unforgettable gaming experience."
 version: 1.0
+minGameVersion: 135
 
-#the minimum game build required to run this mod
-minGameVersion: 129
+main: "totalchaos.TotalChaos"
