@@ -79,11 +79,9 @@ class TotalChaos : Mod() {
 		Events.run(Trigger.drawOver::class.java) {
 			buffer.end();
 			
-			Draw.draw(Draw.z()) {
-				Draw.blend(Blending.additive);
-				Draw.blit(buffer, shader);
-				Draw.blend();
-			}
+			Draw.blend(Blending.additive);
+			Draw.blit(buffer, shader);
+			Draw.blend();
 		};
 	};
 	
