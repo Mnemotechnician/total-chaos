@@ -76,7 +76,7 @@ class TotalChaos : Mod() {
 			};
 		};*/
 		
-		Events.run(Trigger.postDraw::class.java) {
+		Events.run(Trigger.drawOver::class.java) {
 			buffer.end();
 			
 			Draw.draw(Draw.z()) {
