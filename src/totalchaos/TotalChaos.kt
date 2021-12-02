@@ -14,17 +14,19 @@ class TotalChaos : Mod() {
 	init {
 		Events.on(ClientLoadEvent::class.java) {
 			//regions
-			val copy = Seq<TextureAtlas.AtlasRegion>(500);
-			Core.atlas.regions.each {
-				copy.add(TextureAtlas.AtlasRegion(it));
-			};
-			
-			Core.atlas.regions.each {
-				val index = Mathf.random(copy.size - 1);
-				val newRegion = copy.remove(index);
+			Time.run(60f) {
+				val copy = Seq<TextureAtlas.AtlasRegion>(500);
+				Core.atlas.regions.each {
+					copy.add(TextureAtlas.AtlasRegion(it));
+				};
 				
-				it.set(newRegion);
-			};
+				Core.atlas.regions.each {
+					val index = Mathf.random(copy.size - 1);
+					val newRegion = copy.remove(index);
+					
+					it.set(newRegion);
+				};
+			}
 			
 			//bundles
 			val map = Core.bundle.properties;
