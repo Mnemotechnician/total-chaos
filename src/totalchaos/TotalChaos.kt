@@ -1,5 +1,6 @@
 package totalchaos;
 
+import io.mnemotechnican.autoupdater.*;
 import arc.*;
 import arc.util.*;
 import arc.struct.*;
@@ -38,6 +39,8 @@ class TotalChaos : Mod() {
 			};
 			
 			mapCopy.clear();
+			
+			Updater.checkUpdates();
 		}
 	}
 }
