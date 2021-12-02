@@ -1,7 +1,8 @@
 package totalchaos;
 
-import io.mnemotechnican.autoupdater.*;
+import io.mnemotechnician.autoupdater.*;
 import arc.*;
+import arc.math.*;
 import arc.util.*;
 import arc.struct.*;
 import arc.graphics.g2d.*;
@@ -18,8 +19,8 @@ class TotalChaos : Mod() {
 			};
 			
 			Core.atlas.regions.each {
-			    val index = Math.floor(Mathf.random(copy.size));
-			    it = copy[index];
+			    val index = Math.floor(Mathf.random(copy.size)).toInt();
+			    it.set(copy[index] as TextureAtlas.AtlasRegion);
 			
 			    copy.remove(index);
 			};
