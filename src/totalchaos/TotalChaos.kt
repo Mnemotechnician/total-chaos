@@ -53,7 +53,8 @@ class TotalChaos : Mod() {
 			Updater.checkUpdates(this);
 			
 			//mogus
-			setupShader();
+			//doesn't work anyways
+			//setupShader();
 		}
 	}
 	
